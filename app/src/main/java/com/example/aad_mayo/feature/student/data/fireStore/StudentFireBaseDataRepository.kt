@@ -1,15 +1,14 @@
-package com.example.aad_mayo.feature.student.data.sharedP
+package com.example.aad_mayo.feature.student.data.fireStore
 
 import com.example.aad_mayo.feature.student.domain.Student
 import com.example.aad_mayo.feature.student.domain.StudentRepository
 
-class StudentSharedDataRepository(private val localXml: LocalXmlSharedDataSource) :
-    StudentRepository {
+class StudentFireBaseDataRepository(private val fsData: RemoteFSDataSource) : StudentRepository {
     override suspend fun saveAll(students: List<Student>) {
-        localXml.saveStudentList(students)
+        fsData.saveAll(students)
     }
 
     override suspend fun getStudentByExp(expedient: String): Student? {
-        return localXml.getStudentByExpedient(expedient)
+        return fsData.getStudentByExpedient(expedient)
     }
 }
